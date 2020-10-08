@@ -1,0 +1,21 @@
+WITH pop_2007 AS (
+  SELECT * FROM population_years WHERE year = 2007
+)
+SELECT name, MIN(population)
+FROM pop_2007
+JOIN countries
+  ON pop_2007.country_id = countries.id;
+
+SELECT AVG(pop.population)
+FROM population_years AS pop
+JOIN countries
+  ON pop.country_id = countries.id
+WHERE name = 'Poland';
+
+SELECT countries.continent, SUM(pop.population)
+FROM population_years AS pop
+JOIN countries
+  ON pop.country_id = countries.id
+WHERE pop.year = 2010
+GROUP BY 1
+ORDER BY 2 DESC;
